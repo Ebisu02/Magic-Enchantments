@@ -1,0 +1,16 @@
+name: Nodropitems
+version: '${project.version}'
+main: nodropitems.nodropitems.Nodropitems
+api-version: 1.16
+authors: [ 9Ebisu ]
+description: no drop item
+
+commands:
+  cenchant: [
+    vampiric: [
+      1:
+      2:
+    ]
+  ]
+permissions:
+
