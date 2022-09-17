@@ -6,11 +6,7 @@ authors: [ 9Ebisu ]
 description: no drop item
 
 commands:
-  cenchant: [
-    vampiric: [
-      1:
-      2:
-    ]
-  ]
+  cenchant:
+
 permissions:
 
