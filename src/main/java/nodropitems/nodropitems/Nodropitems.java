@@ -147,6 +147,8 @@ public final class Nodropitems extends JavaPlugin implements Listener, TabExecut
                     lore.add(l);
                 }
             }
+            meta.setLore(lore);
+            item.setItemMeta(meta);
         }
         if (lvl.equalsIgnoreCase("2")) {
             item.addUnsafeEnchantment(CustomEnchants.POISON_TOUCH, 2);
@@ -156,6 +158,8 @@ public final class Nodropitems extends JavaPlugin implements Listener, TabExecut
                     lore.add(l);
                 }
             }
+            meta.setLore(lore);
+            item.setItemMeta(meta);
         }
     }
 
@@ -168,6 +172,8 @@ public final class Nodropitems extends JavaPlugin implements Listener, TabExecut
                     lore.add(l);
                 }
             }
+            meta.setLore(lore);
+            item.setItemMeta(meta);
         }
         if (lvl.equalsIgnoreCase("2")) {
             item.addUnsafeEnchantment(CustomEnchants.VAMPRIC, 2);
@@ -177,6 +183,8 @@ public final class Nodropitems extends JavaPlugin implements Listener, TabExecut
                     lore.add(l);
                 }
             }
+            meta.setLore(lore);
+            item.setItemMeta(meta);
         }
     }
 
