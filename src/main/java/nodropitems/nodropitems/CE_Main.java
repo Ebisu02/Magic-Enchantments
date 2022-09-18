@@ -4,6 +4,8 @@ import nodropitems.nodropitems.customEnchants.CE_DrivenByTheWind;
 import nodropitems.nodropitems.customEnchants.CE_PoisoningTouch;
 import nodropitems.nodropitems.customEnchants.CE_Undroppable;
 import nodropitems.nodropitems.customEnchants.CE_Vampiric;
+import nodropitems.nodropitems.customEnchants.Listeners.CE_PlayerDeathEventListener;
+import nodropitems.nodropitems.customEnchants.Listeners.CE_PlayerHitOtherPlayerEventListener;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -26,6 +28,7 @@ public final class CE_Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        saveDefaultConfig();
         setPlugin(this);
         // vampiric
         enchantment_vampiric = new CE_Vampiric("vampiric");
@@ -41,7 +44,8 @@ public final class CE_Main extends JavaPlugin {
         registerEnchantment(enchantment_poisoningTouch);
 
         getCommand("cenchant").setTabCompleter(new CE_TabCompleter());
-        this.getServer().getPluginManager().registerEvents(new CE_Realisations(), this);
+        this.getServer().getPluginManager().registerEvents(new CE_PlayerHitOtherPlayerEventListener(), this);
+        this.getServer().getPluginManager().registerEvents(new CE_PlayerDeathEventListener(), this);
         Bukkit.getServer().getConsoleSender().sendMessage("[CustomEnchantments]: Plugin is enabled!");
     }
 

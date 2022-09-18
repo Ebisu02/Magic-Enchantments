@@ -1,5 +1,6 @@
-package nodropitems.nodropitems;
+package nodropitems.nodropitems.customEnchants.Listeners;
 
+import nodropitems.nodropitems.CE_Main;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -9,10 +10,11 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 
-public class CE_Realisations implements Listener {
-    // Undroppable realisation
+
+public class CE_PlayerDeathEventListener implements Listener {
     @EventHandler
     public void onPlayerDeath(final PlayerDeathEvent e) {
+        // For Undroppable enchantment
         if (e.getEntity() instanceof Player) {
             e.setKeepInventory(true);
             Inventory inv = e.getEntity().getInventory();
