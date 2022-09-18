@@ -1,6 +1,6 @@
 name: Nodropitems
 version: '${project.version}'
-main: nodropitems.nodropitems.Nodropitems
+main: nodropitems.nodropitems.CE_Main
 api-version: 1.16
 authors: [ 9Ebisu ]
 description: no drop item

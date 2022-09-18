@@ -1,39 +1,36 @@
-package nodropitems.nodropitems;
+package nodropitems.nodropitems.customEnchants;
 
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.inventory.ItemStack;
 
-public class EnchantWrapper extends Enchantment {
+import static nodropitems.nodropitems.CE_Utilities.getPlugin;
 
-    private final String name;
-    private final int maxLvl;
+public class CE_Vampiric extends Enchantment {
 
-    public EnchantWrapper(String namespace, String name, int lvl) {
-        super(NamespacedKey.minecraft(namespace));
-        this.name = name;
-        this.maxLvl = lvl;
+    public CE_Vampiric(String namespace) {
+        super(new NamespacedKey(getPlugin(), namespace));
     }
 
     @Override
     public String getName() {
-        return name;
+        return "Vampiric";
     }
 
     @Override
     public int getMaxLevel() {
-        return maxLvl;
+        return 2;
     }
 
     @Override
     public int getStartLevel() {
-        return 0;
+        return 1;
     }
 
     @Override
     public EnchantmentTarget getItemTarget() {
-        return null;
+        return EnchantmentTarget.WEAPON;
     }
 
     @Override
