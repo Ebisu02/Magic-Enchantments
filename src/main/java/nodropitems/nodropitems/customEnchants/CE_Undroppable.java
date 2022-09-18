@@ -1,20 +1,27 @@
 package nodropitems.nodropitems.customEnchants;
 
+import nodropitems.nodropitems.CE_Main;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.List;
 
 import static nodropitems.nodropitems.CE_Utilities.getPlugin;
 
-public class CE_Undroppable extends Enchantment {
+public class CE_Undroppable extends Enchantment implements CE_Executor {
+    private final String Name = "Undroppable";
+
     public CE_Undroppable(String namespace) {
         super(new NamespacedKey(getPlugin(), namespace));
     }
 
     @Override
     public String getName() {
-        return "Undroppable";
+        return this.Name;
     }
 
     @Override
@@ -29,7 +36,7 @@ public class CE_Undroppable extends Enchantment {
 
     @Override
     public EnchantmentTarget getItemTarget() {
-        return null;
+        return EnchantmentTarget.ALL;
     }
 
     @Override
@@ -50,5 +57,14 @@ public class CE_Undroppable extends Enchantment {
     @Override
     public boolean canEnchantItem(ItemStack item) {
         return false;
+    }
+
+    @Override
+    public void enchant(Player player, ItemStack item, ItemMeta meta, List<String> lore, String lvl) {
+        item.addUnsafeEnchantment(CE_Main.enchantment_undroppable, 1);
+        meta.addEnchant(CE_Main.enchantment_undroppable, 1, true);
+        lore.add("Undroppable");
+        meta.setLore(lore);
+        item.setItemMeta(meta);
     }
 }

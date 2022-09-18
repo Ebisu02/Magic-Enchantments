@@ -14,7 +14,6 @@ public class CE_TabCompleter implements TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         List<String> list_ench_name = Arrays.asList("vampiric", "poison", "nodrop", "driven_by_the_wind");
-        List<String> list_lvl_value = Arrays.asList("1", "2");
 
         String input = args[0].toLowerCase();
 

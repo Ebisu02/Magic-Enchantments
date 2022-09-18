@@ -1,13 +1,19 @@
 package nodropitems.nodropitems.customEnchants;
 
+import nodropitems.nodropitems.CE_Main;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.List;
 
 import static nodropitems.nodropitems.CE_Utilities.getPlugin;
 
-public class CE_PoisoningTouch extends Enchantment {
+public class CE_PoisoningTouch extends Enchantment implements CE_Executor {
+    private final String Name = "Poisoning Touch";
 
     public CE_PoisoningTouch(String namespace) {
         super(new NamespacedKey(getPlugin(), namespace));
@@ -15,7 +21,7 @@ public class CE_PoisoningTouch extends Enchantment {
 
     @Override
     public String getName() {
-        return "Poisoning Touch";
+        return this.Name;
     }
 
     @Override
@@ -51,5 +57,31 @@ public class CE_PoisoningTouch extends Enchantment {
     @Override
     public boolean canEnchantItem(ItemStack item) {
         return false;
+    }
+
+    @Override
+    public void enchant(Player player, ItemStack item, ItemMeta meta, List<String> lore, String lvl) {
+        if (lvl.equalsIgnoreCase("1")) {
+            item.addUnsafeEnchantment(CE_Main.enchantment_poisoningTouch, 1);
+            lore.add("Poisoning Touch I");
+            if (meta.hasLore()) {
+                for (String l : meta.getLore()) {
+                    lore.add(l);
+                }
+            }
+            meta.setLore(lore);
+            item.setItemMeta(meta);
+        }
+        if (lvl.equalsIgnoreCase("2")) {
+            item.addUnsafeEnchantment(CE_Main.enchantment_poisoningTouch, 2);
+            lore.add("Poisoning Touch II");
+            if (meta.hasLore()) {
+                for (String l: meta.getLore()) {
+                    lore.add(l);
+                }
+            }
+            meta.setLore(lore);
+            item.setItemMeta(meta);
+        }
     }
 }

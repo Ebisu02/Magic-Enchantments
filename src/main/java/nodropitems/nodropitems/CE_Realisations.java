@@ -20,7 +20,7 @@ public class CE_Realisations implements Listener {
             ArrayList<ItemStack> toSave = new ArrayList<ItemStack>();
             for (ItemStack item: inv) {
                 if (item != null) {
-                    if (item.getItemMeta().getLore().contains("Undroppable")) {
+                    if (item.getItemMeta().getEnchants().containsKey(CE_Main.enchantment_undroppable)) {
                         toSave.add(item);
                     } else {
                         toDrop.add(item);

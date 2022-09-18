@@ -6,19 +6,14 @@ import nodropitems.nodropitems.customEnchants.CE_Undroppable;
 import nodropitems.nodropitems.customEnchants.CE_Vampiric;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.NamespacedKey;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 import static nodropitems.nodropitems.CE_Utilities.*;
 
@@ -31,11 +26,7 @@ public final class CE_Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        Bukkit.getServer().getPluginManager().registerEvents(new CE_Realisations(), this);
-        Bukkit.getServer().getConsoleSender().sendMessage("[CustomEnchantments]: Plugin is enabled!");
-        getCommand("cenchant").setExecutor(this);
-        getCommand("cenchant").setTabCompleter(new CE_TabCompleter());
-
+        setPlugin(this);
         // vampiric
         enchantment_vampiric = new CE_Vampiric("vampiric");
         registerEnchantment(enchantment_vampiric);
@@ -48,6 +39,10 @@ public final class CE_Main extends JavaPlugin {
         // Poisoning Touch
         enchantment_poisoningTouch = new CE_PoisoningTouch("poisoning_touch");
         registerEnchantment(enchantment_poisoningTouch);
+
+        getCommand("cenchant").setTabCompleter(new CE_TabCompleter());
+        this.getServer().getPluginManager().registerEvents(new CE_Realisations(), this);
+        Bukkit.getServer().getConsoleSender().sendMessage("[CustomEnchantments]: Plugin is enabled!");
     }
 
     @Override
@@ -70,7 +65,7 @@ public final class CE_Main extends JavaPlugin {
             Player player = (Player) sender;
             ItemStack item = ((Player) sender).getItemInHand();
             ItemMeta meta = item.getItemMeta();
-            List<String> lore = new ArrayList<String>();
+            ArrayList<String> lore = new ArrayList<String>();
             if (label.equalsIgnoreCase("cenchant")) {
                 if (args.length != 2) {
                     sendError(sender);
@@ -80,19 +75,19 @@ public final class CE_Main extends JavaPlugin {
 
                 // Undroppable
                 if (args[0].equalsIgnoreCase("nodrop")) {
-                    CE_CommandExecutors.customEnchantment_Undroppable(player, item, meta, lore, "1");
+                    enchantment_undroppable.enchant(player, item, meta, lore, "1");
                 }
                 // Poison
                 else if (args[0].equalsIgnoreCase("poison")) {
-                    CE_CommandExecutors.customEnchantment_PoisoningTouch(player, item, meta, lore, args[1]);
+                    enchantment_poisoningTouch.enchant(player, item, meta, lore, args[1]);
                 }
                 // Vampiric
                 else if (args[0].equalsIgnoreCase("vampiric")) {
-                    CE_CommandExecutors.customEnchantment_Vampiric(player, item, meta, lore, args[1]);
+                    enchantment_vampiric.enchant(player, item, meta, lore, args[1]);
                 }
                 // Driven by the wind
                 else if (args[0].equalsIgnoreCase("driven_by_the_wind")) {
-                    CE_CommandExecutors.customEnchantment_DrivenByTheWind(player, item, meta, lore, "1");
+                    enchantment_drivenByTheWind.enchant(player, item, meta, lore, "1");
                 }
                 // Send error if incorrect command
                 else {

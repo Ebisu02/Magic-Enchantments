@@ -9,7 +9,12 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 
 public class CE_Utilities {
+
     private static CE_Main plugin;
+
+    public static void setPlugin(CE_Main plugin) {
+        CE_Utilities.plugin = plugin;
+    }
 
     public static CE_Main getPlugin() {
         return plugin;
@@ -38,6 +43,7 @@ public class CE_Utilities {
 
     public static void sendError(CommandSender sender) {
         sender.sendMessage(ChatColor.RED + "Unknown command!");
+        sender.sendMessage(ChatColor.RED + "Correct command is: /cenchant [name of enchant] [level]");
     }
 
     public static void registerEnchantment(Enchantment enchantment) {
