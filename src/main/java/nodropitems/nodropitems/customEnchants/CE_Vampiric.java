@@ -19,6 +19,7 @@ public class CE_Vampiric extends Enchantment implements CE_Executor {
         super(new NamespacedKey(getPlugin(), namespace));
     }
 
+
     @Override
     public String getName() {
         return this.Name;
@@ -63,23 +64,15 @@ public class CE_Vampiric extends Enchantment implements CE_Executor {
     public void enchant(Player player, ItemStack item, ItemMeta meta, List<String> lore, String lvl) {
         if (lvl.equalsIgnoreCase("1")) {
             item.addUnsafeEnchantment(CE_Main.enchantment_vampiric, 1);
+            meta.addEnchant(CE_Main.enchantment_vampiric, 1, true);
             lore.add("Vampiric I");
-            if (meta.hasLore()) {
-                for (String l : meta.getLore()) {
-                    lore.add(l);
-                }
-            }
             meta.setLore(lore);
             item.setItemMeta(meta);
         }
         if (lvl.equalsIgnoreCase("2")) {
             item.addUnsafeEnchantment(CE_Main.enchantment_vampiric, 2);
+            meta.addEnchant(CE_Main.enchantment_vampiric, 2, true);
             lore.add("Vampiric II");
-            if (meta.hasLore()) {
-                for (String l: meta.getLore()) {
-                    lore.add(l);
-                }
-            }
             meta.setLore(lore);
             item.setItemMeta(meta);
         }

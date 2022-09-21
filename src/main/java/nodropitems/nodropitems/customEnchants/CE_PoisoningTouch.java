@@ -63,23 +63,15 @@ public class CE_PoisoningTouch extends Enchantment implements CE_Executor {
     public void enchant(Player player, ItemStack item, ItemMeta meta, List<String> lore, String lvl) {
         if (lvl.equalsIgnoreCase("1")) {
             item.addUnsafeEnchantment(CE_Main.enchantment_poisoningTouch, 1);
-            lore.add("Poisoning Touch I");
-            if (meta.hasLore()) {
-                for (String l : meta.getLore()) {
-                    lore.add(l);
-                }
-            }
+            meta.addEnchant(CE_Main.enchantment_poisoningTouch, 1, true);
+            lore.add("Poisoning touch I");
             meta.setLore(lore);
             item.setItemMeta(meta);
         }
         if (lvl.equalsIgnoreCase("2")) {
             item.addUnsafeEnchantment(CE_Main.enchantment_poisoningTouch, 2);
-            lore.add("Poisoning Touch II");
-            if (meta.hasLore()) {
-                for (String l: meta.getLore()) {
-                    lore.add(l);
-                }
-            }
+            meta.addEnchant(CE_Main.enchantment_poisoningTouch, 2, true);
+            lore.add("Poisoning touch II");
             meta.setLore(lore);
             item.setItemMeta(meta);
         }
