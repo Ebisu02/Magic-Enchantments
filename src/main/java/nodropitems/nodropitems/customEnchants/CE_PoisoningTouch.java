@@ -1,6 +1,7 @@
 package nodropitems.nodropitems.customEnchants;
 
 import nodropitems.nodropitems.CE_Main;
+import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
@@ -61,19 +62,21 @@ public class CE_PoisoningTouch extends Enchantment implements CE_Executor {
 
     @Override
     public void enchant(Player player, ItemStack item, ItemMeta meta, List<String> lore, String lvl) {
-        if (lvl.equalsIgnoreCase("1")) {
-            item.addUnsafeEnchantment(CE_Main.enchantment_poisoningTouch, 1);
-            meta.addEnchant(CE_Main.enchantment_poisoningTouch, 1, true);
-            lore.add("Poisoning touch I");
-            meta.setLore(lore);
-            item.setItemMeta(meta);
-        }
-        if (lvl.equalsIgnoreCase("2")) {
-            item.addUnsafeEnchantment(CE_Main.enchantment_poisoningTouch, 2);
-            meta.addEnchant(CE_Main.enchantment_poisoningTouch, 2, true);
-            lore.add("Poisoning touch II");
-            meta.setLore(lore);
-            item.setItemMeta(meta);
+        if (!item.getItemMeta().getEnchants().containsKey(CE_Main.enchantment_poisoningTouch)) {
+            if (lvl.equalsIgnoreCase("1")) {
+                item.addUnsafeEnchantment(CE_Main.enchantment_poisoningTouch, 1);
+                meta.addEnchant(CE_Main.enchantment_poisoningTouch, 1, true);
+                lore.add(ChatColor.GRAY + "Отравляющие касание I");
+                meta.setLore(lore);
+                item.setItemMeta(meta);
+            }
+            if (lvl.equalsIgnoreCase("2")) {
+                item.addUnsafeEnchantment(CE_Main.enchantment_poisoningTouch, 2);
+                meta.addEnchant(CE_Main.enchantment_poisoningTouch, 2, true);
+                lore.add(ChatColor.GRAY + "Отравляющее касание II");
+                meta.setLore(lore);
+                item.setItemMeta(meta);
+            }
         }
     }
 }

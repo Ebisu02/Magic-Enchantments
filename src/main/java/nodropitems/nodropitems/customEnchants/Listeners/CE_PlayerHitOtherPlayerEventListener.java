@@ -1,9 +1,6 @@
 package nodropitems.nodropitems.customEnchants.Listeners;
 
 import nodropitems.nodropitems.CE_Main;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Mob;
 import org.bukkit.entity.NPC;
 import org.bukkit.entity.Player;
@@ -17,18 +14,12 @@ public class CE_PlayerHitOtherPlayerEventListener implements Listener {
     @EventHandler
     public void onPlayerHit(EntityDamageByEntityEvent e) {
         if (e.getDamager() instanceof Player) {
-            // For Driven by the wind enchantment
             try {
+                // For Driven by the wind enchantment
                 if (((Player) e.getDamager()).getEquipment().getBoots().getItemMeta().getEnchants().containsKey(CE_Main.enchantment_drivenByTheWind)) {
                     ((Player) e.getDamager()).getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100, 0));
                 }
-            }
-            catch (Exception er) {
-                // To Debug
-                //er.printStackTrace();
-            }
-            // For Vampiric Enchant
-            try {
+                // For Vampiric Enchant
                 if (((Player) e.getDamager()).getEquipment().getItemInMainHand().getItemMeta().getEnchants().containsKey(CE_Main.enchantment_vampiric)) {
                     // Do
                     //e.getDamager().sendMessage("TEST");
@@ -55,13 +46,7 @@ public class CE_PlayerHitOtherPlayerEventListener implements Listener {
                         }
                     }
                 }
-            }
-            catch (Exception er) {
-                // To Debug
-                //er.printStackTrace();
-            }
-            // For Poisoning Touch
-            try {
+                // For Poisoning Touch
                 if (((Player) e.getDamager()).getEquipment().getItemInMainHand().getItemMeta().getEnchants().containsKey(CE_Main.enchantment_poisoningTouch)) {
                     if (((Player) e.getDamager()).getEquipment().getItemInMainHand().getItemMeta().getLore().contains("Poisoning touch I")) {
                         if (e.getEntity() instanceof Player) {
@@ -93,10 +78,11 @@ public class CE_PlayerHitOtherPlayerEventListener implements Listener {
                         }
                     }
                 }
+                // For Freezing Touch
             }
             catch (Exception er) {
-                // To Debug
-                //er.printStackTrace();
+                // DEBUG
+                // er.printStackTrace();
             }
         }
     }

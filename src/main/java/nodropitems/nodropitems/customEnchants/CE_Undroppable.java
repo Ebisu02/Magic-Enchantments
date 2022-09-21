@@ -1,6 +1,7 @@
 package nodropitems.nodropitems.customEnchants;
 
 import nodropitems.nodropitems.CE_Main;
+import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
@@ -61,10 +62,12 @@ public class CE_Undroppable extends Enchantment implements CE_Executor {
 
     @Override
     public void enchant(Player player, ItemStack item, ItemMeta meta, List<String> lore, String lvl) {
-        item.addUnsafeEnchantment(CE_Main.enchantment_undroppable, 1);
-        meta.addEnchant(CE_Main.enchantment_undroppable, 1, true);
-        lore.add("Undroppable");
-        meta.setLore(lore);
-        item.setItemMeta(meta);
+        if (!item.getItemMeta().getEnchants().containsKey(CE_Main.enchantment_undroppable)) {
+            item.addUnsafeEnchantment(CE_Main.enchantment_undroppable, 1);
+            meta.addEnchant(CE_Main.enchantment_undroppable, 1, true);
+            lore.add(ChatColor.GRAY + "Невыпадаемый");
+            meta.setLore(lore);
+            item.setItemMeta(meta);
+        }
     }
 }
