@@ -1,9 +1,6 @@
 package nodropitems.nodropitems;
 
-import nodropitems.nodropitems.customEnchants.CE_DrivenByTheWind;
-import nodropitems.nodropitems.customEnchants.CE_PoisoningTouch;
-import nodropitems.nodropitems.customEnchants.CE_Undroppable;
-import nodropitems.nodropitems.customEnchants.CE_Vampiric;
+import nodropitems.nodropitems.customEnchants.*;
 import nodropitems.nodropitems.customEnchants.Listeners.CE_PlayerDeathEventListener;
 import nodropitems.nodropitems.customEnchants.Listeners.CE_PlayerHitOtherPlayerEventListener;
 import org.bukkit.Bukkit;
@@ -21,6 +18,7 @@ import static nodropitems.nodropitems.CE_Utilities.*;
 
 public final class CE_Main extends JavaPlugin {
 
+    //public static CE_FreezingTouch enchantment_freezingTouch;
     public static CE_Vampiric enchantment_vampiric;
     public static CE_Undroppable enchantment_undroppable;
     public static CE_DrivenByTheWind enchantment_drivenByTheWind;
@@ -30,6 +28,9 @@ public final class CE_Main extends JavaPlugin {
     public void onEnable() {
         saveDefaultConfig();
         setPlugin(this);
+        // Freezing Touch
+/*        enchantment_freezingTouch = new CE_FreezingTouch("freezing_touch");
+        registerEnchantment(enchantment_freezingTouch);*/
         // vampiric
         enchantment_vampiric = new CE_Vampiric("vampiric");
         registerEnchantment(enchantment_vampiric);
@@ -56,6 +57,7 @@ public final class CE_Main extends JavaPlugin {
         onDisable_forEnchantments(enchantment_undroppable);
         onDisable_forEnchantments(enchantment_poisoningTouch);
         onDisable_forEnchantments(enchantment_drivenByTheWind);
+        //onDisable_forEnchantments(enchantment_freezingTouch);
         // Plugin shutdown logic
         Bukkit.getServer().getConsoleSender().sendMessage("[CustomEnchantments]: Plugin is disabled!");
         saveConfig();
@@ -78,21 +80,38 @@ public final class CE_Main extends JavaPlugin {
                 // Enchantments
 
                 // Undroppable
-                if (args[0].equalsIgnoreCase("nodrop")) {
-                    enchantment_undroppable.enchant(player, item, meta, lore, "1");
+                if (args[0].equalsIgnoreCase("nodrop") && args[1].equalsIgnoreCase("1")) {
+                    if (!meta.getEnchants().containsKey(enchantment_undroppable)) {
+                        enchantment_undroppable.enchant(player, item, meta, lore, args[1]);
+                    }
+                    else {
+                        sender.sendMessage(ChatColor.RED + "This item already have this enchant!");
+                    }
                 }
                 // Poison
-                else if (args[0].equalsIgnoreCase("poison")) {
-                    enchantment_poisoningTouch.enchant(player, item, meta, lore, args[1]);
+                else if (args[0].equalsIgnoreCase("poison") && (args[1].equalsIgnoreCase("1") || args[1].equalsIgnoreCase("2"))) {
+                    if (!meta.getEnchants().containsKey(enchantment_poisoningTouch)) {
+                        enchantment_poisoningTouch.enchant(player, item, meta, lore, args[1]);
+                    }
                 }
                 // Vampiric
-                else if (args[0].equalsIgnoreCase("vampiric")) {
-                    enchantment_vampiric.enchant(player, item, meta, lore, args[1]);
+                else if (args[0].equalsIgnoreCase("vampiric") && (args[1].equalsIgnoreCase("1") || args[1].equalsIgnoreCase("2"))) {
+                    if (!meta.getEnchants().containsKey(enchantment_vampiric)) {
+                        enchantment_vampiric.enchant(player, item, meta, lore, args[1]);
+                    }
                 }
                 // Driven by the wind
-                else if (args[0].equalsIgnoreCase("driven_by_the_wind")) {
-                    enchantment_drivenByTheWind.enchant(player, item, meta, lore, "1");
+                else if (args[0].equalsIgnoreCase("driven_by_the_wind") && args[1].equalsIgnoreCase("1")) {
+                    if (!meta.getEnchants().containsKey(enchantment_drivenByTheWind)) {
+                        enchantment_drivenByTheWind.enchant(player, item, meta, lore, args[1]);
+                    }
                 }
+                // Freezing touch
+/*                else if (args[0].equalsIgnoreCase("freezing") && (args[1].equalsIgnoreCase("1") || args[1].equalsIgnoreCase("2"))) {
+                    if (!meta.getEnchants().containsKey(enchantment_freezingTouch)) {
+                        enchantment_freezingTouch.enchant(player, item, meta, lore, args[1]);
+                    }
+                }*/
                 // Send error if incorrect command
                 else {
                     sendError(sender);
@@ -103,7 +122,7 @@ public final class CE_Main extends JavaPlugin {
             return true;
         }
         else {
-            sender.sendMessage("You don't have permission to do that!");
+            sender.sendMessage(ChatColor.RED + "You don't have permission to do that!");
         }
         return false;
     }

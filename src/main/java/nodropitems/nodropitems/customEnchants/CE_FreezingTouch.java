@@ -1,3 +1,4 @@
+/*
 package nodropitems.nodropitems.customEnchants;
 
 import nodropitems.nodropitems.CE_Main;
@@ -13,21 +14,22 @@ import java.util.List;
 
 import static nodropitems.nodropitems.CE_Utilities.getPlugin;
 
-public class CE_DrivenByTheWind extends Enchantment implements CE_Executor {
-    private final String Name = "Driven by the wind";
+public class CE_FreezingTouch extends Enchantment implements CE_Executor{
 
-    public CE_DrivenByTheWind(String namespace) {
+    private final String Name = "Freezing Touch";
+
+    public CE_FreezingTouch(String namespace) {
         super(new NamespacedKey(getPlugin(), namespace));
     }
 
     @Override
     public String getName() {
-        return this.Name;
+        return Name;
     }
 
     @Override
     public int getMaxLevel() {
-        return 1;
+        return 2;
     }
 
     @Override
@@ -37,7 +39,7 @@ public class CE_DrivenByTheWind extends Enchantment implements CE_Executor {
 
     @Override
     public EnchantmentTarget getItemTarget() {
-        return EnchantmentTarget.ARMOR_FEET;
+        return EnchantmentTarget.WEAPON;
     }
 
     @Override
@@ -62,13 +64,22 @@ public class CE_DrivenByTheWind extends Enchantment implements CE_Executor {
 
     @Override
     public void enchant(Player player, ItemStack item, ItemMeta meta, List<String> lore, String lvl) {
-        if (!item.getItemMeta().getEnchants().containsKey(CE_Main.enchantment_poisoningTouch)) {
-            item.addUnsafeEnchantment(CE_Main.enchantment_drivenByTheWind, 1);
-            List<String> oldLore = item.getItemMeta().getLore();
-            meta.addEnchant(CE_Main.enchantment_drivenByTheWind, 1, true);
-            lore.add(ChatColor.GRAY + "Гонимый ветром");
-            meta.setLore(lore);
-            item.setItemMeta(meta);
+        if (!item.getItemMeta().getEnchants().containsKey(CE_Main.enchantment_freezingTouch)) {
+            if (lvl.equalsIgnoreCase("1")) {
+                item.addUnsafeEnchantment(CE_Main.enchantment_freezingTouch, 1);
+                meta.addEnchant(CE_Main.enchantment_freezingTouch, 1, true);
+                lore.add(ChatColor.GRAY + "Ледяное касание I");
+                meta.setLore(lore);
+                item.setItemMeta(meta);
+            }
+            if (lvl.equalsIgnoreCase("2")) {
+                item.addUnsafeEnchantment(CE_Main.enchantment_freezingTouch, 2);
+                meta.addEnchant(CE_Main.enchantment_freezingTouch, 2, true);
+                lore.add(ChatColor.GRAY + "Ледяное касание II");
+                meta.setLore(lore);
+                item.setItemMeta(meta);
+            }
         }
     }
 }
+*/
