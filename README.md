@@ -1,7 +1,7 @@
 # Magic-Enchantments
-A simple plugin for minecraft (ver 1.16.5). Theme - Custom Ecnhantments
+(ver 1.16.5). Core - SpigotMC.
 
-Commands:
+## Commands:
 
 /cenchant nodrop 1 - Add an enchantment "Undroppable to ur item", what prevent item to drop on the death.
 
